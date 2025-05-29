@@ -1,6 +1,26 @@
-# Stock Price Forecasting with PyTorch
+# 📈 Stock Price Forecasting using LSTM
 
-This project implements a multi-feature LSTM-based time series forecasting model using PyTorch to predict daily stock prices. It performs a manual grid search over key hyperparameters, trains a final model, evaluates on a held-out test set, and provides comprehensive visualizations of results.
+This project builds a deep learning-based forecasting system to predict stock prices using historical data. It demonstrates time-series modeling with LSTM networks, grid search optimization, and data visualization to compare model predictions against actual values.
+
+---
+
+## 🔍 Project Objectives
+
+- Load and preprocess historical stock price data (Open, High, Low, Close, Volume)
+- Build an LSTM-based time-series forecasting model
+- Tune hyperparameters using grid search
+- Evaluate model performance (MSE, MAE, R²)
+- Visualize actual vs predicted prices and prediction error
+
+---
+
+## 🧠 Skills Gained
+
+- Time series data preprocessing and sequence modeling
+- LSTM model construction and training with Keras
+- Hyperparameter optimization using GridSearchCV
+- Model evaluation with common regression metrics
+- Data visualization for deep learning outputs
 
 ---
 
@@ -17,20 +37,39 @@ This project implements a multi-feature LSTM-based time series forecasting model
 
 ---
 
-## ⚙️ Dependencies
+## 🛠 Tools & Libraries Used
 
-- Python 3.7+  
-- [PyTorch](https://pytorch.org/)  
-- scikit-learn  
-- pandas  
-- numpy  
-- matplotlib  
+- Python 3.x
+- Pandas, NumPy
+- Matplotlib for plotting
+- Scikit-learn for preprocessing, metrics, grid search
+- TensorFlow / Keras for building LSTM model
 
-Install all requirements via:
+---
 
-```bash
-pip install torch scikit-learn pandas numpy matplotlib
+## 📁 Dataset Structure
+
+All stock price data is stored in `.csv` files within:
+
 ```
+data/
+  └── stocks/
+       └── AAPL.csv
+       └── TSLA.csv
+       └── ...
+```
+
+Each `.csv` contains:
+
+| Column      | Description                        |
+|-------------|------------------------------------|
+| `Date`      | Trading date                       |
+| `Open`      | Price at market open               |
+| `High`      | Highest price during the day       |
+| `Low`       | Lowest price during the day        |
+| `Close`     | Closing price                      |
+| `Adj Close` | Adjusted closing price             |
+| `Volume`    | Number of shares traded            |
 
 ---
 
@@ -52,53 +91,49 @@ At the top of `stock_price_forecasting_pytorch.py`, adjust the following constan
 
 ---
 
-## 🚀 Usage
+### Run the model
 
-1. Place your per-ticker CSV files (e.g., `AAPL.csv`, `GOOG.csv`) under `data/stocks/` (or `data/etfs/`).
-2. Modify configuration constants in the script if necessary.
-3. Run the script:
+```bash
+python output.py
+```
 
-   ```bash
-   python stock_price_forecasting_pytorch.py
-   ```
-
-The script will:
-- Read and sort the CSV by date.
-- Scale feature columns using Min-Max normalization.
-- Generate overlapping sequences for `lookback` days to predict the next-day price.
-- Perform a manual grid search over:
-  - `lookback` window sizes (e.g., 30 vs 60 days)
-  - LSTM `hidden_size` values (e.g., 50 vs 100)
-  - `dropout` rates (0.2 vs 0.3)
-  - Learning rates (`lr`: 1e-3 vs 1e-4)
-  - `batch_size` (16 vs 32)
-- Print the best hyperparameters found.
-- Retrain a final model on the full training set.
-- Evaluate on the held-out test set and print:
-  - Test MSE
-  - Test MAE
-  - Test R²
-- Generate and display:
-  1. Training loss curve  
-  2. Actual vs. Predicted price line plot  
-  3. Actual vs. Predicted scatter plot  
-  4. Prediction error histogram
+This will:
+- Search for best hyperparameters using GridSearchCV
+- Train the best model on historical data
+- Display visualizations including:
+  - Actual vs Predicted prices
+  - Loss curve
+  - Prediction error histogram
 
 ---
 
-## 📊 Sample Output
+## 📊 Results
 
-```text
-Testing: lookback=30, hidden=50, drop=0.2, lr=0.001, bs=16
-...
-Best hyperparameters: {'lookback': 60, 'hidden_size': 100, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 32}
-Final model trained.
-Test MSE: 25.1234
-Test MAE: 3.4567
-Test R²:  0.8921
-```
+- Model is evaluated on test data using:
+  - Mean Squared Error (MSE)
+  - Mean Absolute Error (MAE)
+  - R² Score
+- Plots provide visual understanding of forecasting quality
 
-Visualizations will pop up in separate windows (or inline if using a Jupyter notebook).
+---
+
+## 📌 Example Output
+## Result
+![Result](https://github.com/user-attachments/assets/96be2fa5-8a0d-42a3-9341-e7c571249cf6)
+
+## Loss Curve
+![Training Loss Curve](https://github.com/user-attachments/assets/a3d8354b-9207-4cfb-8c92-e3b651334606)
+
+## AAPL Adc Close
+![AAPL Adc Close](https://github.com/user-attachments/assets/387591a2-ef9c-4a82-a0a3-a466d21a6770)
+
+
+## Prediction Error Distrubution
+![Prediction Error Distribution](https://github.com/user-attachments/assets/4fe5414b-b6fc-4909-81dd-d09a517704e1)
+
+## Actual vs Predcited Scatter
+
+![Actual vs Predicted Scatter](https://github.com/user-attachments/assets/9f8b7dd4-e364-4c53-904b-2c156f67e920)
 
 ---
 
