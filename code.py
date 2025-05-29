@@ -165,7 +165,7 @@ print(f"Test R²:  {r2_score(inv_test, inv_pred):.4f}")
 # VISUALIZATIONS
 dates = df["Date"].iloc[split + lb:]
 
-# a) Actual vs Predicted Time Series
+# Actual vs Predicted Time Series
 plt.figure(figsize=(12,6))
 plt.plot(dates, inv_test,  label="Actual")
 plt.plot(dates, inv_pred,  label="Predicted")
@@ -176,7 +176,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-# b) Training Loss Curve
+# Training Loss Curve
 plt.figure(figsize=(8,4))
 plt.plot(history.model_.history.history['loss'], label='Train Loss')
 plt.title('Training Loss Curve')
@@ -186,7 +186,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-# c) Scatter Actual vs Predicted
+# Scatter Actual vs Predicted
 plt.figure(figsize=(6,6))
 plt.scatter(inv_test, inv_pred, alpha=0.5)
 mn, mx = min(inv_test.min(), inv_pred.min()), max(inv_test.max(), inv_pred.max())
@@ -197,7 +197,7 @@ plt.ylabel('Predicted')
 plt.tight_layout()
 plt.show()
 
-# d) Error Histogram
+# Error Histogram
 errors = inv_pred - inv_test
 plt.figure(figsize=(8,4))
 plt.hist(errors, bins=30)
